@@ -1,0 +1,265 @@
+{% load static %}
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Invoice | Xtrader store| Bill</title>
+    <!-- CSS files -->
+    <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <style>
+	.navitemsextra{
+	  font-size: 15px;
+  font-weight: 500;
+  margin: 5px 10px;
+  color: white;
+  opacity: 1;
+	}
+	.nav-link{
+		background-color: rgb(16, 123, 238)
+	}
+</style>
+  <body class="antialiased">
+    <div class="page">
+      <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="{% url 'pos:index' %}">
+              <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="auto" height="50" alt="dhakasolution" class="mt-2">
+            </a>
+          </h1>
+         
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="navbar-nav pt-lg-3">
+              <li class="navitemsextra nav-item">
+                <a class="nav-link" href="{% url 'pos:index' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-home-outline"></i></span>
+                  <span class="nav-link-title" >
+                    Dashboard
+                  </span>
+                </a>
+              </li>
+              <li class="navitemsextra  nav-item">
+                <a class="nav-link" href="{% url 'billmanage:addbill' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                  <span class="nav-link-title">
+                    New Bill
+                  </span>
+                </a>
+              </li>
+              <li class="navitemsextra  activenav active nav-item">
+                <a class="nav-link" href="{% url 'billmanage:records' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-archive"></i></span>
+                  <span class="nav-link-title" style="
+                  border-bottom: 2px solid white;">
+                    Bill Records
+                  </span>
+                </a>
+              </li>
+              <li class="navitemsextra nav-item">
+                <a class="nav-link" href="{% url 'pos:index' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px;"><i class="typcn typcn-lock-open"></i></span>
+                  <span class="nav-link-title">
+                    help
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+	  <style>
+		  .companyname{
+			align-items: center;
+			height: 40px;
+			margin: 4px;
+			font-size: 30px;
+			font-weight: 600;
+			font-family: initial;
+			width: max-content;
+			background-color: rgb(1, 1, 75);
+			color: white;
+		  }
+		  .companyname > span{
+			  margin:8px
+		  }
+		  .duplicatemark{
+							margin: 0;
+							padding: 0;
+							color: black;
+							font-size: 10px;
+						}
+						.duplicatemark > li{
+							padding: 3px;
+							width: 65px;
+							margin: 1px;
+							text-align: center;
+						}
+	  </style>
+      <div class="content">
+        <div class="container-xl">
+			<!-- Page title -->
+			<div class="page-header d-print-none">
+			  <div class="row align-items-center">
+				<div class="col" style="zoom: 130%;">
+					<div class="page-pretitle">
+            Xtrader Store
+					  </div>
+					  <h2 class="page-title">
+						Bill Records
+					  </h2>
+				</div>
+				<!-- Page title actions
+				<div class="col-auto ms-auto d-print-none">
+				  <button type="button" class="btn btn-primary" onclick="printDiv('invoice').print();">
+					Print Invoice
+				  </button>
+				</div> -->
+			  </div>
+			</div>
+			<div class="card">
+                <div class="card-header row">
+                  <div class="col-4">
+                    <h3 class="card-title">Invoices</h3>
+                  </div>
+                  <div class="col-8">
+
+                    <form action="{% url 'billmanage:records' %}" method="POST">
+                      {% csrf_token %}
+                      <div class="m-1 form-group" style="display: flex; justify-content: space-evenly;">
+                        <div>
+                          <label for="start" class=" form-label col-form-label">Filter with Date:</label>
+                        </div>
+                        <div>
+                          <input type="date" name="start" class="form-control" required>
+                        </div>
+                        
+                        <div>
+                          <label for="" class="col-form-label form-label">To</label>
+                        </div>
+                        <div>
+                          <input type="date" name="end" class="form-control" required>
+                        </div>
+                        <div>
+                          <button type="submit" class="btn btn-dark"><i class="typcn typcn-filter"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="table-responsive" >
+                  
+                  <table class="table card-table table-vcenter text-nowrap datatable">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="width: 4 rem; font-size: 13px;">Invoice No.</th>
+                            <th style="width: 10rem; font-size: 13px;">Recipient</th>
+                            <th style="width: 15rem;overflow-wrap: break-word;font-size: 13px;">Address</th>
+                            <th style="width: 8rem;font-size: 13px;">Code no</th>
+                            <th style="font-size: 13px;">Total(Rand)</th>
+                            <th style="font-size: 13px;">Date</th>
+                            <th></th>
+                          </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    {% for bill in bills%}
+                      <tr>
+                        <td style="width: 5rem;"><span class="text-muted">{{ bill.invoice_type }} {{bill.billno}}</span></td>
+                        <td style="width: 10rem;"><a href="{% url 'billmanage:invoice' billno=bill.billno %}" class="text-reset" tabindex="-1">{{bill.recipient}}</a></td>
+                        <td style="width: 15rem;overflow-wrap: break-word;">{{bill.address}}</td>
+                        <td style="width: 8rem;">{{bill.GSTno}}</td>
+                        <td>{{bill.grandtotal}}</td>
+                        <td>{{bill.date}}</td>
+                        <td class="text-end d-flex" style="justify-content: space-around;">
+                            <!--<a href="" style="text-decoration: none;" ><button class="btn btn-outline-primary pl-2 pr-2 mt-1">Update</button></a>-->
+                            <a  href="{% url 'billmanage:delete' billno=bill.billno %}" style="text-decoration: none;"><button class="btn btn-outline-red pl-2 pr-2 mt-1" >Delete</button></a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                      
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer d-flex align-items-center">
+                  <ul class="pagination m-0 ms-auto">
+                    {% if bills.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" style="color: rgb(250, 40, 40);" href="?page={{ bills.previous_page_number }}">
+                        <i class="typcn typcn-arrow-back"></i>
+                        Prev
+                      </a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item m-1">
+                        Page <span><u>{{ bills.number }}</u></span> of <span>{{ bills.paginator.num_pages }}</span>
+                    </li>
+                    {% if bills.has_next %}
+                    <li class="page-item ">
+                        <a class="page-link" style="color: rgb(43, 40, 250);" href="?page={{ bills.next_page_number }}">
+                        <i class="typcn typcn-arrow-forward"></i>
+                        Next
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+		  </div>
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container">
+            <div class="row text-center">
+              
+              <div class="col-12">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2023
+                    All rights reserved.
+                  </li>
+                  <li class="list-inline-item">
+                      Xtrader store <a href="https://xtrader.co.za/">xtrader.co.za</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <!-- Tabler Core -->
+    <script src="{% static 'js/tabler.min.js' %}"></script>
+	<script>
+	function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,391 @@
+{% load static %}
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Invoice | Xtrader store</title>
+    <!-- CSS files -->
+    <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <style>
+    .companyname{
+      align-items: center;
+      height: 40px;
+      margin: 4px;
+      font-size: 30px;
+      font-weight: 600;
+      font-family: initial;
+      width: max-content;
+      background-color: rgb(2, 2, 170);
+      color: white;
+    }
+    .companyname > span{ 
+        margin:8px
+    }
+    .duplicatemark{
+      margin: 0;
+      padding: 0;
+      color: black;
+      font-size: 10px;
+      margin-left: 8rem;
+      width: 50%;
+    }
+    .duplicatemark > li{
+        padding: 3px;
+        margin: 1px;
+        text-align: center;
+        font-size: 15px;font-weight: 600; border: 1.5px solid black; list-style: none;
+    }
+</style>
+  <style>
+	.navitemsextra{
+	  font-size: 15px;
+  font-weight: 500;
+  margin: 5px 10px;
+  color: white;
+  opacity: 1;
+	}
+	.nav-link{
+		background-color: rgb(16, 120, 238)
+	}
+</style>
+  <body class="antialiased">
+    <div class="page">
+      <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="{% url 'pos:index' %}">
+              <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="auto" height="50" alt="dhakasolution" class="mt-2">
+            </a>
+          </h1>
+         
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="navbar-nav pt-lg-3">
+              <li class="navitemsextra nav-item">
+                <a class="nav-link" href="{% url 'pos:index' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px">
+                    <i class="typcn typcn-home-outline"></i></span>
+                  <span class="nav-link-title" >
+                    Dashboard
+                  </span>
+                </a>
+              </li>
+              <li class="navitemsextra  activenav active  nav-item">
+                <a class="nav-link" href="{% url 'billmanage:addbill' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                  <span class="nav-link-title" style="
+                  border-bottom: 2px solid white;">
+                    New Bill
+                  </span>
+                </a>
+              </li>
+              <li class="navitemsextra nav-item">
+                <a class="nav-link" href="{% url 'billmanage:records' %}" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-archive"></i></span>
+                  <span class="nav-link-title">
+                    Bill Records
+                  </span>
+                </a>
+              </li>
+              <li class="navitemsextra nav-item">
+                <a class="nav-link" href="" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px;"><i class="typcn typcn-lock-open"></i></span>
+                  <span class="nav-link-title">
+                    help
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+	  
+      <div class="content">
+        <div class="container-xl">
+			<!-- Page title -->
+			<div class="page-header d-print-none">
+			  <div class="row align-items-center">
+				<div class="col" style="zoom: 130%;">
+					<div class="page-pretitle">
+						Xtrader Store
+					  </div>
+					  <h2 class="page-title">
+						To, {{bill.recipient}}
+					  </h2>
+				</div>
+				<div class="col-auto ms-auto d-print-none">
+				  <button type="button" class="btn btn-success" onclick="printDiv('invoice', 1).print();">
+					Print Original
+				  </button>
+          <button type="button" class="btn btn-yellow" onclick="printDiv('invoice', 0).print();">
+            Print Duplicate
+            </button>
+				</div>
+			  </div>
+			</div>
+			<div class="card card-lg" id="invoice" style="width: 95%; margin:auto; height: 1100px;">
+                
+			  <div class="card-body">
+				  <div class="row text-center">
+					  <h2 style="font-weight:600;border-bottom: 2px solid gray; margin-bottom: 2rem;">Tax Invoice</h4>
+				  </div>
+
+          
+				<div class="row">
+				  <div class="col-6">
+					<div class="row">
+						<div class="col-12">
+							{% comment %} <p> GSTIN: 09AHVPB2268D1Z9</p> {% endcomment %}
+						</div>
+					</div>
+
+					<div class="row">
+
+					<div class="col-12">
+							<h1 class="navbar-brand navbar-brand-autodark">
+								<a href=".">
+								  <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="auto" height="50" alt="dhakasolution" class="mt-2">
+								</a>
+							  </h1>
+
+							<div>
+								<p style="text-align: center; font-weight: 600; margin-top: 5px; width: max-content;">
+									<span style="font-size: 17px;">Extrader Store</span><br>
+									<br>  Shop 13 & 14 Solly Sachs Building,
+                  <br> 111 Commissioner St, Johannesburg. RSA
+								</p>
+
+							</div>
+						</div>
+
+					</div>
+					
+				  </div>
+				  <div class="col-6" style="padding-left: 8rem">
+					<p style="font-size: 15px; font-weight: 600;">Call: +2781 493 4268 | +2781 457 2808<br> E-mail : <E-mail>shoni@xtrader.co.za</E-mail></p>
+					<br>
+					<ul class="duplicatemark">
+						<li id="printstatus" > Original Copy</li>
+					</ul>
+				  </div>
+				</div>
+				<hr style="margin-top: -5px;margin-bottom: 10px;">
+				 <div class="row">
+					<div class="col-8">
+						<div class="form-group row mb-2">
+							<label class="form-label col-2 col-form-label">Name</label>
+							<div class="col">
+                                <div class="form-control" class="name" id="name" >
+                                    {{bill.recipient}}
+								</div>
+                            </div>
+						</div>
+						<div class="form-group row mb-2">
+							<label class="form-label col-2 col-form-label">Address </label>
+							<div class="col">
+                                <div class="form-control" class="name" id="name" >
+                                    {{bill.address}}
+								</div>
+							</div>
+						</div>
+						<div class="form-group row mb-2">
+							<label class="form-label col-2 col-form-label">GST </label>
+							<div class="col">
+                                <div class="form-control" class="name" id="name" >
+                                    {{bill.GSTno}}
+								</div>  
+                            </div>
+						</div>
+					</div>
+					
+					<div class="col-4 text-center">
+						<div class="form-group">
+							<label class="pb-2" style="border-bottom: 1px solid gray ; font-size: 17px;">{{ bill.invoice_type }} </label>
+							<div class="mt-2" id="billno">| Invoice No. {{bill.billno}}</div>
+						</div>
+						<hr style="margin: 0.8rem;">
+						<div class="form-group row mb-2" style="justify-content: space-around;">
+							<label class="form-label col col-form-label" style="font-size: 15px;">Date: {{bill.date}}</label>
+							
+						</div>
+					</div>
+				 </div>
+
+
+				 <label class="mb-2 form-label col-2 col-form-label" style="font-size: 15px; border-bottom: 1px solid gray ;">Items</label>
+				
+         <div class="table-responsive">
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                      <thead>
+                          <tr class="text-center">
+                              <th style="width: 4 rem; font-size: 13px;">item.no</th>
+                              <th style="width: 15rem;overflow-wrap: break-word; font-size: 13px;">Description</th>
+                               <th style="font-size: 13px;">Item Code</th>
+                              <th style="font-size: 13px;">Quantity</th>
+                              <th style="font-size: 13px;">Price</th>
+                              <th style="font-size: 13px;">Total</th>
+                            </tr>
+                      </thead>
+                      <tbody class="text-center">
+                      {% for item in items%}
+                        <tr>
+                          <td style="width: 4rem;"><span class="text-muted">{{forloop.counter}}</span></td>
+                          <td style="width: 15rem;overflow-wrap: break-word;">{{item.itemname}}</td>
+                          <td style="width: 8rem;">{{item.hsncode}}</td>
+                          <td>{{item.qty}}</td>
+                          <td>{{item.rate}}</td>
+                          <td>{{item.amount}}</td>
+                        </tr>
+                      {% endfor %}
+                        
+                      </tbody>
+                    </table>
+                  </div>
+
+                <div style="position: absolute; bottom: 0; right: -54px">
+                    <div class="row justify-content-center " style=" text-align: center; margin: auto; zoom: 90%;">
+                        
+                        <div class="col-2">
+                            <label class="form-label col-form-label" style="border-bottom: 1px solid gray;">Total Amount:</label>
+                            <div class="mt-2" style="font-size: 15px;">R. <span id="amt">{{bill.total}}</span></div>
+                        </div>
+                        <hr style="width: 1px;height: auto;margin: 0 10px;padding: 0;">
+                        <div class="col-1">
+                            <label class="form-label col-form-label" style="border-bottom: 1px solid gray;">Tax rate</label>
+                            <div class="mt-2" style="font-size: 15px;"><span id="CGST">{{bill.cgst}}%</span></div>
+                        </div>
+                        <hr style="width: 1px;height: auto;margin: 0 10px;padding: 0;">
+
+                        {% comment %} <div class="col-1">
+                            <label class="form-label col-form-label" style="border-bottom: 1px solid gray;">SGST</label>
+                            <div class="mt-2" style="font-size: 15px;"><span id="SGST">{{bill.sgst}}%</span></div>
+                        </div> {% endcomment %}
+
+                        <hr style="width: 1px;height: auto;margin: 0 10px;padding: 0;">
+                        <div class="col-2">
+                            <label class="form-label col-form-label" style="border-bottom: 1px solid gray">GST(Total Tax) </label>
+                            <div class="mt-2" style="font-size: 15px;">R. <span id="grandamt">{{gst}}</span></div>
+                        </div>
+                        <hr style="    width: 1px;height: auto;margin: 0 10px;padding: 0;">
+                        <div class="col-2">
+                            <label class="form-label col-form-label" style="border-bottom: 1px solid gray">Grand Total</label>
+                            <div class="mt-2" style="font-size: 15px;">R. <span id="grandamt">{{bill.grandtotal}}</span></div>
+                        </div>
+                        {% comment %} <div class="col-12 mt-2">
+                            {% if paisa%}
+                                <label class="form-label col-form-label" style="font-size: 15px;width:max-content; border-bottom: 1px solid gray;">Taka (in words): <span style="color: gray;"> {{rs}} point {{paisa}}</span></label>
+                            {% else %}
+                                <label class="form-label col-form-label" style="font-size: 15px;width:max-content;border-bottom: 1px solid gray;">Taka (in words): <span style=" color:gray"> {{rs}}</span></label>
+                            {% endif %}
+                        </div> {% endcomment %}
+                    </div>
+
+              {% comment %} <div class="row">
+                        <div class="col-4 mt-2 " style="margin-left: 10px; border: 1.5px solid gray; zoom: 90%;">
+                            <label class="form-label col-form-label  pb-0" >Business Name: <span style="color: gray;"> XTRADER (PTY) LTD</span></label>
+                            <label class="form-label col-form-label  pb-0" >Bank Name: <span style="color: gray;"> FIRST NATIONAL BANK</span></label>
+                            <label class="form-label col-form-label  pb-0 pt-1">Bank Account No.: <span style="color: gray;"> 630 434 70698</span></label>
+                            <label class="form-label col-form-label  pb-0 pt-1">Branch: <span style="color: gray;"> JOHANNESBURG</span></label>
+                           
+                        </div>
+                        <div class="col-3 mt-2 m-4 mb-0" style="zoom: 85%;">
+                            <label class="form-label col-form-label  pb-0" style="font-size: 17px;" ><b>E. &. O. E. </b></label>
+                            <label class="form-label col-form-label  pb-0" style="font-size: 15px;"><b>Term & Conditions:</b></label>
+                            <label class="form-label col-form-label  pb-2" style="color: gray;">Please pay by A/C payee Cheques/Draft only.All Disputes subject to Xtrader jurisdiction only.</label>
+                        </div>
+                        <div class="col-3 mt-2 pt-1 text-center" style="border: 1.5px solid gray;">
+                            <label class="form-label col-form-label  pb-0" >For <span style="font-size: 20px;"><b>Xtrader Store</b></span> </label><br><br>
+                            <label class="form-label col-form-label  pb-0" style="font-size: 12px;"><b>Signature of Issuing Person</b></label>
+                        </div>
+
+                    </div> 
+
+                    <div class="row">
+                      <div class="col-4 mt-2 " style="margin-left: 10px; border: 1.5px solid gray; zoom: 90%;">
+                          <label class="form-label col-form-label  pb-0" >Business Name: <span style="color: gray;"> XTRADER (PTY) LTD </span></label>
+                          <label class="form-label col-form-label  pb-0" >Bank Name: <span style="color: gray;"> FIRST NATIONAL BANK</span></label>
+                          <label class="form-label col-form-label  pb-0 pt-1">Bank Account No.: <span style="color: gray;"> 630 434 70698 </span></label>      
+                          <label class="form-label col-form-label  pb-0 pt-1">Branch: <span style="color: gray;"> JOHANNESBURG</span></label>       
+                      </div>
+                    <div>
+
+                    <div>
+
+                    </div>
+                    
+                    <p class="text-muted text-center mt-4">This is a Software generated Invoice.</p>
+                </div>
+			  </div> {% endcomment %}
+
+
+			</div>
+
+		  </div>
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container">
+            <div class="row text-center">
+              
+              <div class="col-12">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2023
+                    All rights reserved.
+                  </li>
+                  <li class="list-inline-item">
+                      Xtrader store <a href="https://xtrader.co.za/">xtrader.co.za</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+    <!-- Libs JS -->
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <!-- Tabler Core -->
+    <script src="{% static 'js/tabler.min.js' %}"></script>
+    <script>
+      function printDiv(divName, i) {
+        var type = parseInt(i);
+        if (type==1){
+          document.getElementById('printstatus').innerHTML= 'Original Copy';
+        }
+        else{
+          document.getElementById('printstatus').innerHTML='Duplicate Copy';
+        }
+         var printContents = document.getElementById(divName).innerHTML;
+         var originalContents = document.body.innerHTML;
+    
+         document.body.innerHTML = printContents;
+    
+         window.print();
+    
+         document.body.innerHTML = originalContents;
+    }
+      </script>
+  </body>
+</html>

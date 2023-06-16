@@ -1,0 +1,344 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Invoice | Xtrader | Invoice </title>
+     <!-- CSS files -->
+     <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+     <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+     <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+     <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+     <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+     <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+   
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+
+  <style>
+    .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      
+      a {
+        color: #5D6975;
+        text-decoration: underline;
+      }
+      
+      body {
+        position: relative;
+        width: 21cm;  
+        height: 29.7cm; 
+        margin: 0 auto;
+        color: #001028;
+        background: #FFFFFF; 
+        font-family: Arial, sans-serif; 
+        font-size: 12px; 
+        font-family: Arial;
+      }
+
+      
+      header {
+        padding: 10px 0;
+        margin-bottom: 30px;
+      }
+      
+      #logo {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      
+      #logo img {
+        width: 90px;
+      }
+      
+      h1 {
+        border-top: 1px solid  #5D6975;
+        border-bottom: 1px solid  #5D6975;
+        color: #5D6975;
+        font-size: 2.4em;
+        line-height: 1.4em;
+        font-weight: normal;
+        text-align: center;
+        margin: 0 0 20px 0;
+        background: url(../static/img/dimension.png);
+      }
+      
+      #project {
+        float: left;
+      }
+      
+      #project span {
+        color: #5D6975;
+        {% comment %} text-align: right; {% endcomment %}
+        text-align: left;
+        width: 52px;
+        margin-right: 10px; 
+        display: inline-block;
+        font-size: 0.8em;
+      }
+      
+      #company {
+        float: right;
+        text-align: right;
+      }
+      
+      #project div,
+      #company div {
+        white-space: nowrap;        
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 20px;
+      }
+      
+      table tr:nth-child(2n-1) td {
+        background: #F5F5F5;
+      }
+      
+      table th,
+      table td {
+        text-align: center;
+      }
+      
+      table th {
+        padding: 5px 20px;
+        color: #5D6975;
+        border-bottom: 1px solid #C1CED9;
+        white-space: nowrap;        
+        font-weight: normal;
+      }
+      
+      table .service,
+      table .desc {
+        text-align: left;
+      }
+      
+      table td {
+        padding: 20px;
+        {% comment %} text-align: right; {% endcomment %}
+        text-align: center;
+      }
+      
+      table td.service,
+      table td.desc {
+        vertical-align: top;
+      }
+      
+      table td.unit,
+      table td.qty,
+      table td.total {
+        font-size: 1.2em;
+      }
+      
+      table td.grand {
+        border-top: 1px solid #5D6975;;
+      }
+      
+      #notices .notice {
+        color: #5D6975;
+        font-size: 1.2em;
+      }
+      
+      footer {
+        color: #5D6975;
+        width: 100%;
+        height: 30px;
+        {% comment %} position: absolute; {% endcomment %}
+        bottom: 0;
+        border-top: 1px solid #C1CED9;
+        padding: 8px 0;
+        text-align: center;
+      }
+      .signutre {
+        border-bottom: 1px solid  #5D6975;
+        color: #5D6975;
+        font-size: 2.4em;
+        line-height: 1.4em; 
+        font-weight: normal;
+        text-align: center;
+        margin-top:40px;
+
+      }
+ 
+
+  </style>
+
+  <body>
+
+
+
+    <ul class="duplicatemark">
+      <li id="printstatus" > Original Copy</li>
+    </ul>
+    <div class="page-header d-print-none">
+      <div class="row align-items-center">
+      <div class="col-auto ms-auto d-print-none">
+        <button type="button" class="btn btn-success" onclick="printDiv('invoice', 1).print();">
+        Print Original
+        </button>
+        <button type="button" class="btn btn-yellow" onclick="printDiv('invoice', 0).print();">
+          Print Duplicate
+          </button>
+      </div>
+      </div>
+    </div>
+    <div id="invoice">
+
+    <header class="clearfix">
+      <div id="logo">
+        <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="500" height="60" alt="Extrader" class="mt-2">
+        <h4>Call: +2781 493 4268 | +2781 457 2808</h4>
+      </div>
+      <h4>REG: 2015/404208/ VAT: PENDING</h4>
+      <h1>{{ bill.invoice_type }} | No. {{bill.billno}}</h1>
+
+      <div id="company" class="clearfix">
+        <div>DATE: {{bill.date}}</div>
+        <div>Xtrader (PTY) LTD</div>
+        <div>Formerly T/A Walsoft Computers </div>
+        <div>Computer sales, Web Design & Training</div>
+        <div>www.xtrader.co.za</div>
+        <div>Shop 13 & 14 Solly Sachs Building,</div>
+        <div>111 Commissioner St, Johannesburg. RSA</div>
+        <div>Parking (Basement-Entrace Jourbet St)</div>
+
+
+        <div><a href="mailto:shoni@xtrader.co.za">shoni@xtrader.co.za</a></div>
+      </div>
+
+      <div id="project">
+        <div>Company Name:{{bill.recipient}} </div>
+        <div>Address:{{bill.address}}  </div>
+        <div>Phone:{{bill.phone}}</div>
+        <div>Email: <a href="mailto:{{bill.email}}">{{bill.email}}</a></div>
+        <div>Date:{{bill.date}}</div>
+        <br>
+        <div>Delivery:{{bill.delivery}}</div>
+
+      </div>
+
+    </header>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">S.no</th>
+            <th class="desc">DESCRIPTION</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for item in items%}
+          <tr>
+            <td class="service">{{forloop.counter}}</td>
+            <td class="desc">{{item.itemname}}</td>
+            {% comment %} <td class="unit">{{item.hsncode}}</td> {% endcomment %}
+            <td class="qty">{{item.qty}}</td>
+            <td class="total">R{{item.rate}}</td>
+            <td class="unit">{{item.amount}}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4">SUBTOTAL</td>
+            <td class="total">R{{bill.total}}</td>
+          </tr>
+          <tr>
+            <td colspan="4">TAX {{bill.cgst}}%</td>
+            <td class="total">R{{gst}}</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="grand total">GRAND TOTAL</td>
+            <td class="grand total">R{{bill.grandtotal}}</td>
+          </tr>
+
+
+          <tr>
+            <td colspan="4" class="grand total">GRAND TOTAL (in words)</td>
+    
+        {% if paisa%}
+            <td class="grand total">{{rs}} point {{paisa}}</td>
+        {% else %}
+           <td class="grand total">{{rs}}</td>
+        {% endif %}
+        
+          </tr>
+
+
+        </tbody>
+      </table> 
+      <div id="notices">
+        {% if bill.notice %}
+        <div>NOTICE:</div>
+        <div class="notice">{{bill.notice}}</div>
+        {% endif %}
+      </div>
+
+
+    <section style="display:flex; justify-content:space-between; margin-top:25px;">   
+      <div>
+        <div  style="font-size:15px; font-weight:600">
+          Insured signutre
+          <div class="signutre"></div>
+        </div>
+      </div>
+
+
+      <div>
+        <div style="float:right;color:black; margin-bottom:10px;font-size:15px; font-weight:600">(Authorize signutre) </div>
+        <div>
+          <img style="width:80px;height:80px;" src="{% static 'img/stamp.jpeg' %}" alt="logo">
+          <img style="width:80px;height:80px;" src="{% static 'img/sign.png' %}" alt="logo">
+        </div>
+      </div>
+    </section >
+
+    {% comment %} <div style="margin-bottom:20px;">We gratefully acknowledge receipt full and final settlement </br> 
+      Kindly treat this as an official receipt for your records.</div> {% endcomment %}
+
+      <footer style="font-size:12px; font-weight:600;"> 
+        Business Name: XTRADER (PTY) LTD, Bank Name: FIRST NATIONAL BANK, Bank Account No.: 630 434 70698, Branch: JOHANNESBURG
+      </footer> 
+     
+  </main>
+
+  </div>
+
+
+
+    <!-- Libs JS -->
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <!-- Tabler Core -->
+    <script src="{% static 'js/tabler.min.js' %}"></script>
+   
+   
+    <script > 
+      function printDiv(divName, i) {
+        var type = parseInt(i);
+        if (type==1){
+          document.getElementById('printstatus').innerHTML= 'Original Copy';
+        }
+        else{
+          document.getElementById('printstatus').innerHTML='Duplicate Copy';
+        }
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+      }
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,502 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Invoice | Walsoft Invoice</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- base.html -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="{% static 'css/pos-admin.min.css' %}" rel="stylesheet">
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <!-- CSS files -->
+    <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+  </head>
+
+  <style>
+      .navitemsextra{
+        font-size: 15px;
+    font-weight: 500;
+    margin: 5px 10px;
+    color: rgb(0, 0, 0);
+    opacity: 1;
+      }
+	  .nav-link{
+		background-color: rgb(57, 102, 235)
+	}
+
+  .transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.transaction-table th {
+  background-color: #ccc;
+  color: #000000;
+}
+
+.transaction-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+  color: #000000;
+}
+
+.transaction-table tbody tr:first-child td {
+  border-top: 2px solid #000;
+}
+
+.transaction-table tbody tr:last-child td {
+  border-bottom: 2px solid #000;
+}
+
+.transaction-table tbody td:first-child {
+  border-left: 2px solid #000;
+}
+
+.transaction-table tbody td:last-child {
+  border-right: 2px solid #000;
+}
+
+.transaction-table tbody td:last-child {
+  border-right: 2px solid #000;
+}
+
+.transaction-table tbody td:nth-child(3),
+.transaction-table tbody td:nth-child(4),
+.transaction-table tbody td:nth-child(5),
+.transaction-table tbody td:nth-child(6) {
+  text-align: center;
+}
+.transaction-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.transaction-history-table th,
+.transaction-history-table td {
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.transaction-history-table th {
+  background-color: #ccc;
+  color: #000000;
+}
+
+.transaction-history-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+  color: #000000;
+}
+
+.transaction-history-table tbody tr:first-child td {
+  border-top: 2px solid #000;
+  
+}
+
+.transaction-history-table tbody tr:last-child td {
+  border-bottom: 2px solid #000;
+}
+
+.transaction-history-table tbody td:first-child {
+  border-left: 2px solid #000;
+}
+
+.transaction-history-table tbody td:last-child {
+  border-right: 2px solid #000;
+}
+
+.grand-totals-table {
+  width: 300px;
+  border-collapse: collapse;
+}
+
+.grand-totals-table th,
+.grand-totals-table td {
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.grand-totals-table th {
+  background-color: #ccc;
+  color: #000000;
+}
+
+.highlight {
+    background-color: #F2F2F2;
+    padding: 20px;
+    color: #000000;
+}
+
+.bg-blue {
+    background-color: #3692C2;
+}
+
+.text-light {
+    color: #000000;
+}
+
+.form-heading {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.transaction-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.product-table th,
+.product-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #3692C2;
+    color: #000000;
+}
+
+.product-table th {
+    background-color: #3692C2;
+    color: #000000;
+}
+
+.quantity-input {
+    width: 50px;
+    padding: 5px;
+}
+
+.submit-button {
+    background-color: #ff4d00;
+    color: #000000;
+    padding: 10px 20px;
+    border: 4px solid #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.submit-button:hover {
+    background-color: #E65C00;
+    cursor: pointer;
+}
+
+
+  </style>
+
+  <body id="page-top" class="antialiased">
+    <div class="page">
+        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <h1 class="navbar-brand navbar-brand-autodark">
+                <a href=".">
+                  <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="auto" height="50" alt="Dhaka solution" class="mt-2">
+                </a>
+              </h1>
+             
+              <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="navbar-nav pt-lg-3">
+                  <li class="navitemsextra activenav active nav-item">
+                    <a class="nav-link" href="{% url 'pos:index' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px">
+                          <i class="typcn typcn-home-outline"></i></span>
+                      <span class="nav-link-title" style="
+                      border-bottom: 2px solid white;">
+                        Dashboard
+                      </span>
+                    </a>
+                  </li>
+
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'products:categories_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Category
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'products:products_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Products
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'customers:customers_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Customer
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'sales:sales_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Make Sales
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'wholesale:add_transaction' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Wholesale
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'wholesale:customer_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                       Wholesale Customers
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'billmanage:addbill' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        New Invoice
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'billmanage:records' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-archive"></i></span>
+                      <span class="nav-link-title">
+                        Invoice Records
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'pos:index' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px;">
+                          <i class="typcn typcn-lock-open"></i></span>
+                      <span class="nav-link-title">
+                        help
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+          <div class="content">
+            <div class="container-xl">
+<!-- Links to Product List and Customer List -->
+<section>
+    <h2>Manage Lists</h2>
+    <div class="button-group">
+        <a href="{% url 'wholesale:product_list' %}" class="btn btn-primary">Product List</a>
+        <a href="{% url 'wholesale:customer_list' %}" class="btn btn-primary">Customer List</a>
+    </div>
+    <h2>Add New</h2>
+    <div class="button-group">
+        <a href="{% url 'wholesale:add_product' %}" class="btn btn-danger">Add Product</a>
+        <a href="{% url 'wholesale:add_customer' %}" class="btn btn-danger">Add Customer</a>
+    </div>
+</section>
+<section>
+
+    <div class="highlight">
+        <div class="bg-blue text-light">
+          <h2 class="form-heading">Add Transaction</h2>
+              <form method="POST" class="transaction-form">
+                {% csrf_token %}
+               
+                <div class="form-group">
+                  <label for="customer">Customer:</label>
+                  <select name="customer" id="customer" class="form-control">
+                      {% for customer in customers %}
+                          <option value="{{ customer.id }}">{{ customer.name }}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+          
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td><input type="number" name="quantity_{{ product.id }}" min="0" step="1" class="quantity-input"></td>                         
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+    
+                <button type="submit" class="submit-button">Add Transaction</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="highlight">
+      <div class="bg-blue text-light">
+          <h2>Transaction Details</h2>
+          {% if transactions %}
+              <table class="transaction-table">
+                  <thead>
+                      <tr>
+                          <th>Customer Name</th>
+                          <th>Product Name</th>
+                          <th>Quantity</th>
+                          <th>Cost per Case</th>
+                          <th>Total Amount Owed</th>
+                          <th>Total Cases</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for transaction in transactions %}
+                          <tr>
+                              
+                              {% if forloop.first or transaction.customer != transactions.first.customer %}
+                              <td rowspan="{{ transaction.customer.transactions.count }}">{{ transaction.customer }}</td>
+                              {% endif %}
+                              <td>{{ transaction.product }}</td>
+                              <td>{{ transaction.quantity }}</td>
+                              <td>{{ transaction.cost_per_case }}</td>
+                              <td>{{ transaction.total_amount_owed }}</td>
+                              <td>{{ transaction.total_cases }}</td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          {% endif %}
+      </div>
+  </div>
+  
+  <div class="highlight">
+      <div class="bg-blue text-light">
+          <h2>Transaction History</h2>
+          <table class="transaction-history-table">
+              <thead>
+                  <tr>
+                      <th>Customer Name</th>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
+                      <th>Cost per Case</th>
+                      <th>Total Amount Owed</th>
+                      <th>Total Cases</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for customer in customers %}
+                      {% for product in customer.products.all %}
+                          <tr>
+                              {% if forloop.first %}
+                                  <td rowspan="{{ customer.products.count }}">{{ customer.name }}</td>
+                              {% endif %}
+                              <td>{{ product.name }}</td>
+                              <td>{{ product.pivot.quantity }}</td>
+                              <td>{{ product.pivot.price_per_case }}</td>
+                              <td>{{ product.total_amount_owed }}</td>
+                              <td>{{ customer.calculate_total_cases }}</td>
+                          </tr>
+                      {% endfor %}
+                  {% endfor %}
+              </tbody>
+          </table>
+  
+          <!-- Existing code for transaction form -->
+  
+          <!-- Add the following code after the transaction form -->
+          <h2>Grand Totals</h2>
+          <table class="grand-totals-table">
+              <thead>
+                  <tr>
+                      <th>Grand Total Cases</th>
+                      <th>Grand Total Amount</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>{{ grand_total_cases }}</td>
+                      <td>{{ grand_total_amount }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  
+  {% if customer %}
+      <div class="highlight">
+          <div class="bg-dark text-light">
+              <h2>Customer Details</h2>
+              <div>
+                  <p>Customer: {{ customer.name }}</p>
+                  <p>Total Cases: {{ customer.calculate_total_cases }}</p>
+                  <p>Total Price: {{ total_price }}</p>
+
+              </div>
+          </div>
+      </div>
+  {% endif %}
+  
+</section>
+<section>
+
+</section>
+</div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+    <!-- base.html -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Billmanage -->
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/tabler.min.js' %}"></script>
+
+    <!--JavaScript to dissapear messagess automatically-->
+    <script type='text/javascript' src="{% static 'js/dissapear_messages.js' %}"></script> 
+
+</body>
+
+</html>

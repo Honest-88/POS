@@ -1,0 +1,287 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> Xtrader | Sales Invoive </title>
+  <!-- CSS files -->
+  <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <style>
+
+      @page {
+      size: A4;
+      margin: 0;
+      marks: crop;
+    }
+
+    body {
+      margin: 1cm;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      padding: 0;
+      background-color: white;
+    }
+
+    .page-wrapper {
+      position: relative;
+      width: 21cm;
+      height: 29.7cm;
+      margin: 0 auto;
+      background-color: white;
+      box-sizing: border-box;
+      border: 3mm solid red; /* Bleed space */
+    }
+
+    .page-content {
+      padding: 1cm;
+      box-sizing: border-box;
+    }
+
+    .clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    a {
+      color: #5D6975;
+      text-decoration: underline;
+    }
+
+    body {
+      position: relative;
+      width: 21cm;
+      height: 29.7cm;
+      margin: 0 auto;
+      color: #001028;
+      background: #FFFFFF;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-family: Arial;
+    }
+
+    header {
+      padding: 10px 0;
+      margin-bottom: 30px;
+    }
+
+    #logo {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #logo img {
+      width: 90px;
+    }
+
+    h1 {
+      border-top: 1px solid #5D6975;
+      border-bottom: 1px solid #5D6975;
+      color: #5D6975;
+      font-size: 2.4em;
+      line-height: 1.4em;
+      font-weight: normal;
+      text-align: center;
+      margin: 0 0 20px 0;
+      background: url(../static/img/dimension.png);
+    }
+
+    #project {
+      float: left;
+    }
+
+    #project span {
+      color: #5D6975;
+      text-align: left;
+      width: 52px;
+      margin-right: 10px;
+      display: inline-block;
+      font-size: 0.8em;
+    }
+
+    #company {
+      float: right;
+      text-align: right;
+    }
+
+    #project div,
+    #company div {
+      white-space: nowrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin-bottom: 20px;
+    }
+
+    table tr:nth-child(2n-1) td {
+      background: #F5F5F5;
+    }
+
+    table th,
+    table td {
+      text-align: center;
+    }
+
+    table th {
+      padding: 5px 20px;
+      color: #5D6975;
+      border-bottom: 1px solid #C1CED9;
+      white-space: nowrap;
+      font-weight: normal;
+    }
+
+    table .service,
+    table .desc {
+      text-align: left;
+    }
+
+    table td {
+      padding: 20px;
+      text-align: center;
+      table td.service,
+    table td.desc {
+      vertical-align: top;
+    }
+
+    table td.unit,
+    table td.qty,
+    table td.total {
+      font-size: 1.2em;
+    }
+
+    table td.grand {
+      border-top: 1px solid #5D6975;
+      ;
+    }
+
+    #notices .notice {
+      color: #5D6975;
+      font-size: 1.2em;
+    }
+
+    footer {
+      color: #5D6975;
+      width: 100%;
+      height: 30px;
+      position: absolute;
+      bottom: 0;
+      border-top: 1px solid #C1CED9;
+      padding: 8px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="clearfix">
+    <div id="logo">
+        <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="500" height="60" alt="Extrader" class="mt-2">
+    </div>
+    <h1>Sales Invoice {{sale.id}}</h1>
+    <div id="project">
+      <div><span>To:</span> {{sale.customer.get_full_name}}</div>
+      <div><span>Phone:</span> {{sale.customer.phone}}</div>
+      <div><span>Email:</span> {{sale.customer.email}}</div>
+      <div><span>Address:</span> {{sale.customer.address}}</div>
+      <div><span>Date:</span> {{sale.date}}</div>
+    </div>
+    <div id="company">
+      <div><span>From: </span> Walsoft Computers</div>
+      <div><span>Address:</span> No. 111 Commissioner Street <br> Johannesburg, South Africa</div>
+      <div><span>Phone:</span>  +27 81 457 2808</div>
+      <div><span>Email:</span> sales@walsoftcomputers.com</div>
+      <div><span>Website:</span> www.walsoftcomputers.com</div>
+
+    </div>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th class="service">Item No.</th>
+          <th>Description</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in details %}
+        <tr>
+          <td class="service">{{forloop.counter}}</td>
+          <td class="desc">{{d.product.name}}</td>
+          <td class="unit">R {{d.price}}</td>
+          <td class="qty">{{d.quantity}}</td>
+          <td class="total">R {{d.total_detail}}</td>
+        </tr>
+        <!-- Add more rows for additional services -->
+        {% endfor %}
+        <tr>
+            <td colspan="4" class="text-right pr-2"><b>Subtotal</b></td>
+            <td class="text-right pr-2">R {{sale.sub_total|floatformat:2}}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right pr-2"><b>Tax ({{sale.tax_percentage}}%)</b></td>
+            <td class="text-right pr-2">R {{sale.tax_amount|floatformat:2}}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right pr-2"><b>Grand Total</b></td>
+            <td class="text-right pr-2">R {{sale.grand_total|floatformat:2}}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right pr-2"><b>Amount Paid</b></td>
+            <td class="text-right pr-2">R {{ sale.amount_payed }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right pr-2"><b>Change</b></td>
+            <td class="text-right pr-2">R {{ sale.amount_change }}</td>
+        </tr>
+       
+      </tbody>
+      <tfoot>
+        <tr>
+            <td colspan="5" class="text-center">
+                <p>Thank you for doing business with us!</p>
+            </td>
+        </tr>
+      </tfoot>
+    </table>
+    <section style="display:flex; justify-content:space-between; margin-top:25px;">   
+        <div>
+          <div  style="font-size:15px; font-weight:600">
+            Insured signutre
+            <div class="signutre"></div>
+          </div>
+        </div>
+  
+  
+        <div>
+          <div style="float:right;color:black; margin-bottom:10px;font-size:15px; font-weight:600">(Authorize signutre) </div>
+          <div>
+            <img style="width:80px;height:80px;" src="{% static 'img/stamp.jpeg' %}" alt="logo">
+            <img style="width:80px;height:80px;" src="{% static 'img/sign.png' %}" alt="logo">
+          </div>
+        </div>
+      </section >
+      <br><br>
+    <div id="notices">
+      <div class="notice">
+        Business Name: XTRADER (PTY) LTD, Bank Name: FIRST NATIONAL BANK, Bank Account No.: 630 434 70698, Branch: JOHANNESBURG
+    </div>
+    </div>
+  </main>
+</body>
+</html>
+
+   

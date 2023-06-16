@@ -1,0 +1,30 @@
+{% extends "pos/base.html" %}
+{% load static %}
+{% block content %}
+<!-- total_amount_owed.html -->
+<section>
+
+<div class="bg-blue text-light"><h1>Total Amount Owed</h1></div>
+<div class="highlight">
+    <div class="bg-blue text-light">
+        <!-- Content with high contrast colors -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Total Amount Owed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.total_amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+{% endblock content %}

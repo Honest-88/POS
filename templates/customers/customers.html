@@ -1,0 +1,397 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Invoice | Walsoft Invoice</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- base.html -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="{% static 'css/pos-admin.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css ' %}" rel="stylesheet">
+    <link href="{% static 'css/pagination_buttons.css ' %}" rel="stylesheet">
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <!-- CSS files -->
+    <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+  </head>
+  <style>
+      .navitemsextra{
+        font-size: 15px;
+    font-weight: 500;
+    margin: 5px 10px;
+    color: white;
+    opacity: 1;
+      }
+	  .nav-link{
+		background-color: rgb(57, 102, 235)
+	}
+  </style>
+  <body id="page-top" class="antialiased">
+    <div class="page">
+        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <h1 class="navbar-brand navbar-brand-autodark">
+                <a href=".">
+                  <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="auto" height="50" alt="Dhaka solution" class="mt-2">
+                </a>
+              </h1>
+             
+              <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="navbar-nav pt-lg-3">
+                  <li class="navitemsextra activenav active nav-item">
+                    <a class="nav-link" href="{% url 'pos:index' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px">
+                          <i class="typcn typcn-home-outline"></i></span>
+                      <span class="nav-link-title" style="
+                      border-bottom: 2px solid white;">
+                        Dashboard
+                      </span>
+                    </a>
+                  </li>
+
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'products:categories_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Category
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'products:products_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Products
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'customers:customers_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Customer
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'sales:sales_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Make Sales
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'wholesale:add_transaction' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Wholesale
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'wholesale:customer_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                       Wholesale Customers
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'billmanage:addbill' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        New Invoice
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'billmanage:records' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-archive"></i></span>
+                      <span class="nav-link-title">
+                        Invoice Records
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'pos:index' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px;">
+                          <i class="typcn typcn-lock-open"></i></span>
+                      <span class="nav-link-title">
+                        help
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+          <div class="content">
+            <div class="container-xl">
+<!-- Page Heading -->
+{% block heading %}Customers{% endblock heading %}
+
+<!-- Page content  -->
+
+    <!--Create new customer-->
+    <div class="row ml-0 mb-3">
+        <a href="{% url 'customers:customers_add' %}">
+            <button type="button" class="btn btn-success font-weight-bold">
+                    <i class="fas fa-plus mr-2"></i>
+                    Create new customer
+            </button>
+        </a>
+    </div>
+
+    <!-- DataTable -->
+    <div class="card shadow mb-12">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Customers</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style="width:5%">#</th>
+                            <th style="width:20%">Name</th>
+                            <th style="width:25%">Email</th>
+                            <th style="width:15%">Phone</th>
+                            <th style="width:25%">Adress</th>
+                            <th class="text-center" style="width:10%">Actions</th>
+                        </tr>
+                    </thead>
+                    {% if user.is_superuser %}
+                    <tbody>
+                        {% for c in customers %}
+                        <tr>
+                            <td>{{c.id}}</td>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{c.get_full_name}}</td>
+                            <td>{{c.email}}</td>
+                            <td>{{c.phone}}</td>
+                            <td>{{c.address}}</td>
+                            <td class="text-center">
+                                <!--Update-->
+                                <a href="{% url 'customers:customers_update' c.id %}" class="text-decoration-none">
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Update customer">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </a>
+                                <!--Delete modal-->
+                                
+                                
+                                <!-- Button trigger modal -->
+                                <a class="text-decoration-none">
+                                    <button rel="delete" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </a>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete customer</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div id="updateThisText" class="modal-body">
+                                            Are you sure you want to delete the customer: {{c.name}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a id="updateThisURL" href="{% url 'customers:customers_delete' c.id %}" class="text-decoration-none">
+                                                <button type="button"  class="btn btn-danger">Delete</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<!-- Datatables -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Billmanage -->
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/tabler.min.js' %}"></script>
+
+    <!--JavaScript to dissapear messagess automatically-->
+    <script type='text/javascript' src="{% static 'js/dissapear_messages.js' %}"></script> 
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<!--Datatable buttons-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+<!--Moment JS-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+<!--Datatables-->
+<script>
+    // Call the dataTables jQuery plugin
+    $(document).ready(function() {
+        tblCategories = $('#dataTable').DataTable({
+            dom: 'Bfrtip', // Buttons are draw at this element
+            buttons: [
+                {
+                extend: 'print',
+                text: 'Print <i class="fas fa-file ml-2"></i>',
+                titleAttr: 'Print',
+                className: 'btn btn-info',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ,4 ]
+                }            
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Download Excel <i class="fas fa-file-excel ml-2"></i>',
+                    titleAttr: 'Download Excel',
+                    className: 'btn btn-success ml-2',
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3 ,4 ]
+                    } 
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'Download PDF <i class="fas fa-file-pdf ml-2"></i>',
+                    titleAttr: 'Download PDF',
+                    className: 'btn btn-danger ml-2',
+                    download: 'open',
+                    orientation: 'vertical',
+                    pageSize: 'A4',
+                    title: '*',
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3 ,4 ]
+                    },
+                    customize: function (doc) {
+                        doc.styles = {
+                            header: {
+                                fontSize: 18,
+                                bold: true,
+                                alignment: 'center'
+                            },
+                            subheader: {
+                                fontSize: 13,
+                                bold: true
+                            },
+                            quote: {
+                                italics: true
+                            },
+                            small: {
+                                fontSize: 8
+                            },
+                            tableHeader: {
+                                bold: true,
+                                fontSize: 11,
+                                color: 'white',
+                                fillColor: '#2d4154',
+                                alignment: 'center'
+                            }
+                        };
+                        doc.content[1].table.widths = ['10%', '10%', '30%', '30%', '20%'];
+                        doc.content[1].margin = [0, 35, 0, 0];
+                        doc.content[1].layout = {};
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    {
+                                        alignment: 'left',
+                                        text: ['Creation date: ', {text: moment().format('MM-DD-YYYY (HH:mm:ss)')}]
+                                    },
+                                    {
+                                        alignment: 'right',
+                                        text: ['page ', {text: page.toString()}, ' de ', {text: pages.toString()}]
+                                    }
+                                ],
+                                margin: 20
+                            }
+                        });
+
+                    }
+                }
+            ],
+            deferRender: true,
+            columnDefs: [
+                {
+                    targets: [0],
+                    visible: false,
+                    searchable: false,
+                },
+                {
+                    targets: [-1], // column index (start from 0)
+                    orderable: false, // set orderable false for selected columns
+                }
+            ],
+        });
+    });
+
+    // Alert when trying to delete a customer
+    $('#dataTable tbody')
+    // Event when whe try to delete a customer
+    // We update the text, and href of the modal delete button
+    .on('click', 'button[rel="delete"]', function () {
+    // Row variable
+    var tr = tblCategories.cell($(this).closest('td, li')).index();
+    row_data = ( tblCategories.row(tr.row).data());
+    customer_id = row_data[0];
+    customer_name = row_data[2]
+    new_delete_url  = 'delete/' + customer_id;
+    document.getElementById("updateThisText").innerHTML = "Are you sure you want to delete the customer:  " + customer_name + "?";
+    document.getElementById("updateThisURL").href=new_delete_url;
+    });
+</script>
+{% endblock javascripts %}
+
+</body>
+
+</html>

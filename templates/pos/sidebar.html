@@ -1,0 +1,106 @@
+{% load static %}
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'pos:index' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Walsoft POS</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider  mb-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="{% if "dashboard" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'pos:index' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Products Collapse Menu -->
+    <!-- Nav Item - Sales -->
+    <li class="{% if "sales" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'products:categories_list' %}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Add Category</span></a>
+    </li>
+
+    <!-- Nav Item - Sales -->
+    <li class="{% if "sales" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'products:products_list' %}">
+            <i class="fas fa-fw fa-cart-plus"></i>
+            <span>Add Products</span></a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Customers -->
+    <li class="{% if "customers" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'customers:customers_list' %}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Add Customers</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Sales -->
+    <li class="{% if "sales" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'sales:sales_list' %}">
+            <i class="fas fa-fw fa-cart-plus"></i>
+            <span>Make Sales</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <!-- Nav Item - Sales -->
+    <li class="{% if "billmanage" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'billmanage:addbill' %}">
+            <i class="fas fa-fw fa-cart-plus"></i>
+            <span>New Bill</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <li class="{% if "billmanage" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'billmanage:records' %}">
+            Bill Records
+        </a>
+        
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+
+    <li class="{% if 'admin/wholesale/transaction/' in request.path %}nav-item active{% else %}nav-item{% endif %}">
+        <a class="nav-link" href="{% url 'admin:wholesale_transaction' %}">
+            Wholesale
+        </a>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+    <li class="{% if "wholesale" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
+        <a class="nav-link" href="{% url 'wholesale:customer_list' %}">
+            Wholesale Customers
+        </a>
+        
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+
+    
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+</ul>

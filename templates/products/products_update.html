@@ -1,0 +1,251 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Invoice | Walsoft Invoice</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- base.html -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="{% static 'css/pos-admin.min.css' %}" rel="stylesheet">
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <!-- CSS files -->
+    <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'typicons.font-2.1.2/src/font/typicons.css' %}" rel="stylesheet"/>
+  </head>
+  <style>
+      .navitemsextra{
+        font-size: 15px;
+    font-weight: 500;
+    margin: 5px 10px;
+    color: white;
+    opacity: 1;
+      }
+	  .nav-link{
+		background-color: rgb(57, 102, 235)
+	}
+  </style>
+  <body id="page-top" class="antialiased">
+    <div class="page">
+        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <h1 class="navbar-brand navbar-brand-autodark">
+                <a href=".">
+                  <img src="https://i0.wp.com/xtrader.co.za/wp-content/uploads/2023/03/cropped-cropped-xtrader-logo.png?fit=1917%2C568&ssl=1" width="auto" height="50" alt="Dhaka solution" class="mt-2">
+                </a>
+              </h1>
+             
+              <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="navbar-nav pt-lg-3">
+                  <li class="navitemsextra activenav active nav-item">
+                    <a class="nav-link" href="{% url 'pos:index' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px">
+                          <i class="typcn typcn-home-outline"></i></span>
+                      <span class="nav-link-title" style="
+                      border-bottom: 2px solid white;">
+                        Dashboard
+                      </span>
+                    </a>
+                  </li>
+
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'products:categories_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Category
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'products:products_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Products
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'customers:customers_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Add Customer
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'sales:sales_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Make Sales
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'wholesale:add_transaction' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        Wholesale
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'wholesale:customer_list' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                       Wholesale Customers
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'billmanage:addbill' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-document-add"></i></span>
+                      <span class="nav-link-title">
+                        New Invoice
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'billmanage:records' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px"><i class="typcn typcn-archive"></i></span>
+                      <span class="nav-link-title">
+                        Invoice Records
+                      </span>
+                    </a>
+                  </li>
+                  <li class="navitemsextra nav-item">
+                    <a class="nav-link" href="{% url 'pos:index' %}" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block" style="margin-top: -6px; font-size: 20px;">
+                          <i class="typcn typcn-lock-open"></i></span>
+                      <span class="nav-link-title">
+                        help
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+          <div class="content">
+            <div class="container-xl">
+<!--Go back-->
+<div class="row ml-0 mb-3">
+    <a href="{% url 'products:products_list' %}">
+        <button type="button" class="btn btn-info font-weight-bold">
+            <i class="fas fa-long-arrow-alt-left mr-2"></i>
+            Go back
+        </button>
+    </a>
+</div>
+
+<div class="row">
+    <div class="card col-md-8">
+        <div class="card-body">
+            <form action="{% url 'products:products_update' product.id %}"  method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="inputDescription">Name</label>
+                        <input type="text" class="form-control" name="name" value="{{product.name}}" required>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label for="inputDescription">Buying Price</label>
+                        <input type="number" class="form-control" name="buying_price" value="{{product.buying_price}}" required>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label for="inputDescription">Quantity</label>
+                        <input type="number" class="form-control" name="quantity" value="{{product.quantity}}" required>
+                    </div>
+                    
+
+                    <div class="form-group col-md-4">
+                        <label for="state">State</label>
+                        <select name="state" class="form-control" required>
+                            {% for status in product_status %}
+                                {% if status.0 == product.status   %}
+                                <option value="{{status.0}}" selected>{{status.1}}</option>
+                                {% else %}
+                                <option value="{{status.0}}">{{status.1}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="inputPrice">Price</label>
+                        <input type="number" name="price" step="any"  class="form-control" value="{{product.price}}"  required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="inputDescription">Description</label>
+                        <input type="text" name="description" class="form-control" value="{{product.description}}" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="category">Category</label>
+                        <select name="category" class="form-control" required>
+                            <option value="" selected disabled hidden>Select the category</option>
+                            {% for category in categories %}
+                                {% if product.category.id == category.id%}
+                                <option value="{{category.id}}" selected>{{category.name}}</option>
+                                {% else %}
+                                <option value="{{category.id}}">{{category.name}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success font-weight-bold">Update product</button>
+               
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+  <!-- Bootstrap core JavaScript-->
+    <!-- base.html -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Billmanage -->
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/tabler.min.js' %}"></script>
+
+    <!--JavaScript to dissapear messagess automatically-->
+    <script type='text/javascript' src="{% static 'js/dissapear_messages.js' %}"></script> 
+
+</body>
+
+</html>

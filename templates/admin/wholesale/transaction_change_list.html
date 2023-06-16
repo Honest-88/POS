@@ -1,0 +1,8 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+    <h1 style="font-weight: bold; text-decoration: underline; font-size: 20px;">Week Of {{ cl.result_list.0.week_of }}</h1>
+    <div class="results">
+        {% include "admin/change_list_results.html" %}
+    </div>
+{% endblock %}

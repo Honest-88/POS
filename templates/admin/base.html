@@ -1,0 +1,31 @@
+{% extends 'admin/base.html' %}
+{% block extrahead %}
+{{ block.super }}
+<style>
+:root {
+--primary: rgb(57, 102, 235);
+}
+
+.navitemsextra {
+        font-size: 15px;
+        font-weight: 500;
+        margin: 5px 10px;
+        color: rgb(0, 0, 0);
+        opacity: 1;
+    }
+
+    .nav-link {
+        background-color: rgb(57, 102, 235);
+    }
+
+    .transaction-table th {
+            background-color: #3692C2;  /* Your desired background color */
+            color: #000000;  /* Your desired text color */
+        }
+        
+        .transaction-table tbody tr:nth-child(even) {
+            background-color: #F2F2F2;  /* Your desired background color */
+            color: #000000;  /* Your desired text color */
+        }
+</style>
+{% endblock %}
