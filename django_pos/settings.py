@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-shfzstshi=+%g-@_=nc4_x=9xdpt1thdo=^k#($km%htb-se)(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*", "https://POS.onrender.com/"]
+ALLOWED_HOSTS = ["*", "https://pos-hx21.onrender.com"]
 
 
 # Application definition
